@@ -11,23 +11,28 @@ import AddTechModal from "./components/techs/AddTechModal";
 import TechListModal from "./components/techs/TechListModal";
 import Logs from "./components/logs/Logs";
 
+import {Provider} from "react-redux";
+import store from "./store";
+
 const App = () => {
   useEffect(() => {
     // Initialize Material JS
     M.AutoInit();
   });
   return (
-    <Fragment>
-      <Searchbar />
-      <AddBtn />
-      <AddLogModal />
-      <EditLogModal />
-      <AddTechModal />
-      <TechListModal />
-      <div className='container'>
-        <Logs />
-      </div>
-    </Fragment>
+    <Provider store={store}>
+      <Fragment>
+        <Searchbar />
+        <AddBtn />
+        <AddLogModal />
+        <EditLogModal />
+        <AddTechModal />
+        <TechListModal />
+        <div className='container'>
+          <Logs />
+        </div>
+      </Fragment>
+    </Provider>
   );
 };
 

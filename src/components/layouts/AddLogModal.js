@@ -1,7 +1,9 @@
 import React, {useState} from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
+import {connect} from "react-redux";
+import {addLog} from "../../actions/LogActions";
 
-const AddLogModal = () => {
+const AddLogModal = ({addLog}) => {
   const [message, setMessage] = useState("");
   const [attention, setAttention] = useState(false);
   const [tech, setTech] = useState("");
@@ -14,13 +16,30 @@ const AddLogModal = () => {
     } else {
       // M.Modal.getInstance('#add-modal').close();
 
+      // modal.Modal("close");
+
+      addLog({
+        message,
+        attention,
+        tech,
+        date: new Date()
+      });
+
+      // Get Element
+      const modal = document.querySelector(".addModal");
+      //Get Instance Of An Element
+      var addModalInstance = M.Modal.getInstance(modal);
+      // Apply Material Properties for Modal
+      addModalInstance.close();
+      M.toast({html: "Log Added Successfully"});
+
       setMessage("");
       setAttention(false);
       setTech("");
     }
   };
   return (
-    <div id='add-modal' className='modal' style={modalStyle}>
+    <div id='add-modal' className='modal addModal' style={modalStyle}>
       <div className='modal-content'>
         <h4>Enter System Log</h4>
 
@@ -88,4 +107,10 @@ const modalStyle = {
   height: "75%"
 };
 
-export default AddLogModal;
+const mapToStateProps = state => ({
+  log: state.log
+});
+export default connect(
+  mapToStateProps,
+  {addLog}
+)(AddLogModal);

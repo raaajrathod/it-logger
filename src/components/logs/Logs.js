@@ -1,28 +1,18 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import LogItem from "./LogItem";
 import Loader from "../layouts/Loader";
+import {connect} from "react-redux";
+import {getLogs} from "../../actions/LogActions";
 
-const Logs = () => {
-  const [logs, setLogs] = useState([]);
-  const [loading, setLoading] = useState(false);
+const Logs = ({log,getLogs }) => {
+  const {logs, loading} = log;
 
   useEffect(() => {
     getLogs();
     // eslint-disable-next-line
   }, []);
 
-  const getLogs = async () => {
-    setLoading(true);
-
-    // fetch("logs") => http://localhost:5000/logs  http://localhost:5000 Proxy Written in Package.js
-    const res = await fetch("logs");
-    const data = await res.json();
-
-    setLogs(data);
-    setLoading(false);
-  };
-
-  if (loading) {
+  if (loading || logs === null) {
     return <Loader />;
   }
 
@@ -40,4 +30,13 @@ const Logs = () => {
   );
 };
 
-export default Logs;
+const mapToStateProps = state => ({
+  log: state.log
+});
+
+export default connect(
+  mapToStateProps,
+  {
+    getLogs
+  }
+)(Logs);

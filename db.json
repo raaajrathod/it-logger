@@ -1,25 +1,11 @@
 {
   "logs": [
     {
-      "id": 1,
-      "message": "Changed Workstation at T-22",
+      "message": "System Fixed by Sam",
       "attention": false,
-      "date": "03-02-2019",
-      "tech": "Sam Smith"
-    },
-    {
-      "id": 2,
-      "message": "Changed Workstation at 005",
-      "attention": true,
-      "date": "03-02-2019",
-      "tech": "Jon Doe"
-    },
-    {
-      "id": 3,
-      "message": "Keyboard is Broken",
-      "attention": true,
-      "date": "03-02-2019",
-      "tech": "Sam Smith"
+      "tech": "Sam Smith",
+      "date": "2019-07-20T18:20:34.481Z",
+      "id": 1
     }
   ],
   "techs": [
