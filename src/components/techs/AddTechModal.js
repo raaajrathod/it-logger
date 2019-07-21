@@ -1,7 +1,9 @@
 import React, {useState} from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
+import {connect} from "react-redux";
+import {addTech} from "../../actions/TechActions";
 
-const AddTechModal = () => {
+const AddTechModal = ({addTech}) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
@@ -11,14 +13,24 @@ const AddTechModal = () => {
     } else if (lastName === "") {
       M.toast({html: "Please Enter Last Name "});
     } else {
-      // M.Modal.getInstance('#add-modal').close();
+      addTech({
+        firstName,
+        lastName
+      });
+      // Get Element
+      const modal = document.querySelector(".addTechModal");
+      //Get Instance Of An Element
+      var editModalInstance = M.Modal.getInstance(modal);
+      // Apply Material Properties for Modal
+      editModalInstance.close();
+      M.toast({html: "Technician Added Successfully"});
 
       setFirstName("");
       setLastName("");
     }
   };
   return (
-    <div id='tech-modal' className='modal'>
+    <div id='tech-modal' className='modal addTechModal'>
       <div className='modal-content'>
         <h4>Add Technician </h4>
 
@@ -63,4 +75,7 @@ const AddTechModal = () => {
   );
 };
 
-export default AddTechModal;
+export default connect(
+  null,
+  {addTech}
+)(AddTechModal);

@@ -1,23 +1,18 @@
 {
   "logs": [
     {
-      "date": "03-02-2019",
-      "id": 1,
-      "message": "Changed Workstation at t223123 Test",
-      "tech": "Jon Doe",
-      "attention": false
+      "message": "Changed Network Card on System 007",
+      "attention": false,
+      "tech": "Sam  Smith",
+      "date": "2019-07-21T18:51:31.844Z",
+      "id": 1
     }
   ],
   "techs": [
     {
-      "id": 1,
-      "firstName": "Sam",
-      "lastName": "Smith"
-    },
-    {
-      "id": 2,
-      "firstName": "Jon",
-      "lastName": "Doe"
+      "firstName": "Sam ",
+      "lastName": "Smith",
+      "id": 1
     }
   ]
 }
