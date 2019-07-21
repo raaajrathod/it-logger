@@ -1,11 +1,11 @@
 {
   "logs": [
     {
-      "message": "System Fixed by Sam",
-      "attention": false,
-      "tech": "Sam Smith",
-      "date": "2019-07-20T18:20:34.481Z",
-      "id": 1
+      "date": "03-02-2019",
+      "id": 1,
+      "message": "Changed Workstation at t223123 Test",
+      "tech": "Jon Doe",
+      "attention": false
     }
   ],
   "techs": [

@@ -1,10 +1,23 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
+import {connect} from "react-redux";
+import {updateLog} from "../../actions/LogActions";
 
-const EditLogModal = () => {
+const EditLogModal = ({log, updateLog}) => {
+  const {current} = log;
   const [message, setMessage] = useState("");
   const [attention, setAttention] = useState(false);
   const [tech, setTech] = useState("");
+
+  useEffect(() => {
+    if (current !== null) {
+      setMessage(current.message);
+      setAttention(current.attention);
+      setTech(current.tech);
+      M.updateTextFields();
+    }
+    // eslint-disable-next-line
+  }, [current]);
 
   const onSubmit = () => {
     if (message === "") {
@@ -12,7 +25,21 @@ const EditLogModal = () => {
     } else if (tech === "") {
       M.toast({html: "Please Select Technician "});
     } else {
-      // M.Modal.getInstance('#add-modal').close();
+      updateLog({
+        date: current.date,
+        id: current.id,
+        message,
+        tech,
+        attention
+      });
+
+      // Get Element
+      const modal = document.querySelector(".editModal");
+      //Get Instance Of An Element
+      var editModalInstance = M.Modal.getInstance(modal);
+      // Apply Material Properties for Modal
+      editModalInstance.close();
+      M.toast({html: "Log Updated Successfully"});
 
       setMessage("");
       setAttention(false);
@@ -20,7 +47,7 @@ const EditLogModal = () => {
     }
   };
   return (
-    <div id='edit-modal' className='modal' style={modalStyle}>
+    <div id='edit-modal' className='modal editModal' style={modalStyle}>
       <div className='modal-content'>
         <h4>Enter System Log</h4>
 
@@ -88,4 +115,11 @@ const modalStyle = {
   height: "75%"
 };
 
-export default EditLogModal;
+const mapStateToProp = state => ({
+  log: state.log
+});
+
+export default connect(
+  mapStateToProp,
+  {updateLog}
+)(EditLogModal);
